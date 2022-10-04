@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Javascript exempel 2</title>
+  </head>
+
+  <body>
+    <section id="display">
+      <p id="demo"></p>
+      <p id="output"></p>
+      <p id="outputters"></p>
+      <p id="foreach"></p>
+      <article id="data"></article>
+    </section>
+
+    <section id="combine">
+      <article id="data2">
+        <h1>Todo</h1>
+        <ul id="todos"></ul>
+      </article>
+    </section>
+
+    <script>
+      // Använder innerHTML för att skriva ut till valt id med querySelector
+      let demoText = document.querySelector("#demo");
+      demoText.innerHTML = "Hello World";
+
+      //Outputting single name to the output id
+      let name = "Kalle";
+      let output = document.querySelector("#output");
+      output.innerHTML = name;
+
+      //printing out all names in the outputters id
+      let names = ["Kalle", "Lisa", "Erik", "Maria"];
+      names.forEach((names) => {
+        outputters.innerHTML += names + "<br>";
+      });
+
+      /**
+       * @param {users} name
+       * an 3d array with userdata from a database
+       * users[0] = id
+       * users[1] = name
+       * users[2] = alias
+       */
+      let users = [
+        [1, "Aragorn", "Strider"],
+        [2, "Bilbo", "billabongers"],
+        [3, "Gandalf", "Stormcrow"],
+        [4, "Samwise", "Sam"],
+        [5, "Frodo", "Baggins"],
+        [6, "Legolas", "Greenleaf"],
+        [7, "Gimli", "Son of Gloin"],
+      ];
+      //printing users with a for loop
+      let data = document.querySelector("#data");
+      for (let i = 0; i < users.length; i++) {
+        data.innerHTML += users[i][1] + "<br>";
+      }
+
+      //printing users with a forEach loop
+      let forEach = document.querySelector("#foreach");
+      users.forEach((users) => {
+        forEach.innerHTML += users[1] + "<br>";
+      });
+      /*
+      Printa ut en json filen i console
+      */
+      fetch("data/data.json")
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+        });
+
+      /*
+        Skriva ut en to do listan i en ul
+        */
+      function createNode(element) {
+        return document.createElement(element);
+      }
+
+      function append(parent, el) {
+        return parent.appendChild(el);
+      }
+
+      const ul = document.querySelector("#todos");
+      const url = "data/data.json";
+      fetch(url)
+        .then((resp) => resp.json())
+        .then(function (data) {
+          console.log(data.todos);
+          console.log(
+            "Visa första i json-objektet: " + data.todos[0].todoTitle
+          );
+          let todos = data.todos;
+
+          // Returnerar json-bjekten genom att skapa en ny array med map()
+          return todos.map(function (todo) {
+            let li = createNode("li");
+            li.innerHTML = todo.todoTitle + " " + todo.todoDate;
+            append(ul, li);
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      /*
+        Skriva ut en user listan i en ul
+        */
+      function createNode(element) {
+        return document.createElement(element);
+      }
+    </script>
+  </body>
+</html>

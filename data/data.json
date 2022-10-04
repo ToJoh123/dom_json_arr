@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "todoTitle": "Handla",
+      "todoContent": "Mjölk, smör, bröd",
+      "todoDate": "2016-08-01"
+    },
+    {
+      "todoTitle": "Rätta prov",
+      "todoContent": "Java Webbprogrammering",
+      "todoDate": "2016-08-01"
+    }
+  ],
+  "users": [
+    {
+      "userName": "Kalle",
+      "userPassword": "1234"
+    },
+    {
+      "userName": "Pelle",
+      "userPassword": "1234"
+    }
+  ]
+}
